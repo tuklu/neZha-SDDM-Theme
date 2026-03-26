@@ -1,6 +1,6 @@
 # neZha — SDDM Theme
 
-A layered, minimal lockscreen aesthetic for SDDM with real-time clock, WiFi signal, battery, and keyboard layout indicators.
+A layered, minimal lockscreen aesthetic for SDDM with real-time clock, WiFi signal, battery, and keyboard layout indicators, designed to pair with the [neZha-Hyprlock-Theme Theme](https://github.com/tuklu/neZha-Hyprlock-Theme).
 
 ---
 
@@ -31,6 +31,7 @@ rm assets.tar.xz
 ```
 
 After this, `assets/` should contain:
+
 ```
 assets/
   background.jpg
