@@ -2,7 +2,6 @@
 fonts/SF-Pro-Display-Bold.otf
 
 # Heavy assets — distributed via GitHub Releases, not tracked in git
-# Files stay in your local assets/ folder for testing
 assets/background.jpg
 assets/foreground.png
 assets/middleOverlay.png

@@ -3,9 +3,9 @@ import QtQuick 2.15
 Item {
     anchors.fill: parent
 
-    property string clockFontFamily: ""
-    property string mainFontFamily: ""
-    property color textColor: "#b3ffffff"
+    property string clockFontFamily
+    property string mainFontFamily
+    property color  textColor
 
     Timer {
         interval: 1000; running: true; repeat: true
@@ -18,9 +18,8 @@ Item {
     Text {
         id: timeLabel
         text: Qt.formatTime(new Date(), "hh:mm")
+        font.family: clockFontFamily; font.pixelSize: 300
         color: textColor
-        font.pixelSize: 300
-        font.family: clockFontFamily
         anchors.centerIn: parent
         anchors.verticalCenterOffset: -100
     }
@@ -28,10 +27,8 @@ Item {
     Text {
         id: dateLabel
         text: Qt.formatDate(new Date(), "dddd, MMMM dd")
+        font.family: mainFontFamily; font.pixelSize: 53; font.bold: true
         color: textColor
-        font.pixelSize: 53
-        font.family: mainFontFamily
-        font.bold: true
         anchors.centerIn: parent
         anchors.verticalCenterOffset: -290
     }

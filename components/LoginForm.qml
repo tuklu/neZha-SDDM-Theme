@@ -4,9 +4,9 @@ import QtQuick.Controls 2.15
 Item {
     anchors.fill: parent
 
-    property string mainFontFamily: ""
-    property string iconFontFamily: ""
-    property color textColor: "#b3ffffff"
+    property string mainFontFamily
+    property string iconFontFamily
+    property color  textColor
 
     Column {
         anchors.centerIn: parent
@@ -18,51 +18,37 @@ Item {
             spacing: 5
 
             Text {
-                text: ""
+                text: ""; font.family: iconFontFamily; font.pixelSize: 16
                 color: textColor
-                font.pixelSize: 16
-                font.family: iconFontFamily
             }
             Text {
                 text: userModel.lastUser
-                color: textColor
-                font.pixelSize: 14
-                font.family: mainFontFamily
-                font.bold: true
-                topPadding: -2
+                font.family: mainFontFamily; font.pixelSize: 14; font.bold: true
+                color: textColor; topPadding: -2
             }
         }
 
         TextField {
             id: passwordField
-            width: 222
-            height: 40
-
+            width: 222; height: 40
             focus: true
-            cursorDelegate: Component { Item {} }
             echoMode: TextInput.Password
-
-            font.family: mainFontFamily
-            font.bold: true
-            font.pixelSize: 13
+            cursorDelegate: Component { Item {} }
+            font.family: mainFontFamily; font.pixelSize: 13; font.bold: true
             color: textColor
             horizontalAlignment: TextInput.AlignHCenter
 
             background: Rectangle {
-                color: Qt.rgba(0, 0, 0, 0.2)
-                border.width: 1
-                border.color: Qt.rgba(1, 1, 1, 0.1)
-                radius: 37
+                color: Qt.rgba(0, 0, 0, 0.2); radius: 37
+                border.width: 1; border.color: Qt.rgba(1, 1, 1, 0.1)
             }
 
             Text {
                 anchors.centerIn: parent
                 text: "Give me the password"
+                font.family: mainFontFamily; font.pixelSize: 13; font.bold: true
                 color: Qt.rgba(1, 1, 1, 0.5)
-                font.family: mainFontFamily
-                font.bold: true
-                font.pixelSize: 13
-                visible: passwordField.text.length === 0
+                visible: !passwordField.text.length
             }
 
             Keys.onReturnPressed: sddm.login(userModel.lastUser, passwordField.text, sessionModel.lastIndex)

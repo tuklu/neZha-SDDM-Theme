@@ -6,7 +6,7 @@ A layered, minimal lockscreen aesthetic for SDDM with real-time clock, WiFi sign
 
 ## Preview
 
-> *(Add a screenshot here)*
+![neZha SDDM theme](assets/screenshot.png)
 
 ---
 
@@ -47,11 +47,7 @@ This theme is designed for **SF Pro Display Bold**. To use it:
 1. Download from the [Apple Developer page](https://developer.apple.com/fonts/) (free, requires Apple account)
 2. Place `SF-Pro-Display-Bold.otf` into the `fonts/` directory
 
-If SF Pro is absent, the theme automatically falls back to **Inter Bold** (bundled).
-
-#### Inter Bold *(bundled fallback)*
-
-Already included — no action needed. Source: https://rsms.me/inter/
+If SF Pro is absent, the theme falls back to the system `sans-serif` font.
 
 ### 4. Enable the theme
 
@@ -77,11 +73,18 @@ text_color=#b3ffffff
 
 ### Resolution
 
-The root size defaults to `1920x1080`. If your display differs, edit `Main.qml` lines 9–10:
+The root size is set to the **logical** resolution (physical pixels ÷ HiDPI scale factor). Default is `1600x1000` (3200×2000 @ 2× scale). Find yours by running:
+
+```bash
+sddm-greeter --test-mode --theme /path/to/neZha
+# look for: Adding view for "..." QRect(0,0 WxH)
+```
+
+Then edit `Main.qml` lines 10–11:
 
 ```qml
-width: 1920   // px
-height: 1080  // px
+width: 1600   // px
+height: 1000  // px
 ```
 
 ---
@@ -95,6 +98,19 @@ cd /path/to/neZha
 tar -cJf assets.tar.xz -C assets background.jpg foreground.png middleOverlay.png
 # then attach assets.tar.xz to the GitHub release
 ```
+
+---
+
+## HiDPI & Qt environment
+
+SDDM needs one env var set for the WiFi/battery status to work (Qt 6 deprecated file reads via XMLHttpRequest):
+
+```bash
+sudo mkdir -p /etc/sddm.conf.d
+echo -e "[Environment]\nQML_XHR_ALLOW_FILE_READ=1" | sudo tee /etc/sddm.conf.d/env.conf
+```
+
+Without this, status bar icons will still show but may stop working in a future Qt update.
 
 ---
 
