@@ -1,0 +1,10 @@
+[SddmGreeterTheme]
+Name=neZha
+Description=A layered lockscreen aesthetic for SDDM
+Author=Tuklu
+Copyright=(c) 2026 Tuklu
+License=MIT
+Type=sddm-theme
+Version=1.0
+MainScript=Main.qml
+ConfigFile=theme.conf
