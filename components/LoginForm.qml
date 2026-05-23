@@ -7,46 +7,47 @@ Item {
     property string mainFontFamily
     property string iconFontFamily
     property color  textColor
+    property real   scaleFactor: 1
 
     Column {
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: 414
-        spacing: 6
+        anchors.verticalCenterOffset: 414 * scaleFactor
+        spacing: 6 * scaleFactor
 
         Row {
             anchors.horizontalCenter: parent.horizontalCenter
-            spacing: 5
+            spacing: 5 * scaleFactor
 
             Text {
-                text: ""; font.family: iconFontFamily; font.pixelSize: 16
+                text: ""; font.family: iconFontFamily; font.pixelSize: 16 * scaleFactor
                 color: textColor
             }
             Text {
                 text: userModel.lastUser
-                font.family: mainFontFamily; font.pixelSize: 14; font.bold: true
-                color: textColor; topPadding: -2
+                font.family: mainFontFamily; font.pixelSize: 14 * scaleFactor; font.bold: true
+                color: textColor; topPadding: -2 * scaleFactor
             }
         }
 
         TextField {
             id: passwordField
-            width: 222; height: 40
+            width: 222 * scaleFactor; height: 40 * scaleFactor
             focus: true
             echoMode: TextInput.Password
             cursorDelegate: Component { Item {} }
-            font.family: mainFontFamily; font.pixelSize: 13; font.bold: true
+            font.family: mainFontFamily; font.pixelSize: 11 * scaleFactor; font.bold: true
             color: textColor
             horizontalAlignment: TextInput.AlignHCenter
 
             background: Rectangle {
-                color: Qt.rgba(0, 0, 0, 0.2); radius: 37
-                border.width: 1; border.color: Qt.rgba(1, 1, 1, 0.1)
+                color: Qt.rgba(0, 0, 0, 0.2); radius: 37 * scaleFactor
+                border.width: Math.max(1, scaleFactor); border.color: Qt.rgba(1, 1, 1, 0.1)
             }
 
             Text {
                 anchors.centerIn: parent
                 text: "Give me the password"
-                font.family: mainFontFamily; font.pixelSize: 13; font.bold: true
+                font.family: mainFontFamily; font.pixelSize: 13 * scaleFactor; font.bold: true
                 color: Qt.rgba(1, 1, 1, 0.5)
                 visible: !passwordField.text.length
             }

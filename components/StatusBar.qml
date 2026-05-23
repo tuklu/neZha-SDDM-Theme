@@ -4,21 +4,22 @@ Row {
     property string mainFontFamily
     property string iconFontFamily
     property int    sz: 12
+    property real   scaleFactor: 1
 
     anchors.top: parent.top; anchors.right: parent.right
-    anchors.topMargin: 6; anchors.rightMargin: 11
-    spacing: 13
+    anchors.topMargin: 6 * scaleFactor; anchors.rightMargin: 11 * scaleFactor
+    spacing: 13 * scaleFactor
 
     Row {
-        spacing: 5
+        spacing: 5 * scaleFactor
         Text {
             text: (keyboard && keyboard.layouts && keyboard.layouts[keyboard.currentLayout])
                   ? keyboard.layouts[keyboard.currentLayout].shortName : "U.S"
-            font.family: mainFontFamily; font.pixelSize: 14
-            color: Qt.rgba(1, 1, 1, 0.8); topPadding: -4
+            font.family: mainFontFamily; font.pixelSize: 14 * scaleFactor
+            color: Qt.rgba(1, 1, 1, 0.8); topPadding: -4 * scaleFactor
         }
         Text {
-            text: ""; font.family: iconFontFamily; font.pixelSize: sz
+            text: ""; font.family: iconFontFamily; font.pixelSize: sz * scaleFactor
             color: Qt.rgba(1, 1, 1, 0.8)
         }
     }
@@ -49,22 +50,28 @@ Row {
             }
         }
 
-        text: currentIcon; font.family: iconFontFamily; font.pixelSize: sz
+        text: currentIcon; font.family: iconFontFamily; font.pixelSize: sz * scaleFactor
         color: Qt.rgba(1, 1, 1, 0.8)
     }
 
     Text {
-        text: ""; font.family: iconFontFamily; font.pixelSize: sz
+        text: ""; font.family: iconFontFamily; font.pixelSize: sz * scaleFactor
         color: Qt.rgba(1, 1, 1, 0.8)
     }
 
     Row {
         id: batteryRow
-        spacing: 6
+        spacing: 6 * scaleFactor
 
         property int    capacity: 100
         property string status:   "Unknown"
         property string batPath:  ""
+        property color  normalColor: Qt.rgba(1, 1, 1, 0.8)
+        property color  chargingColor: Qt.rgba(0.25, 0.9, 0.45, 0.95)
+        property color  lowColor: Qt.rgba(1, 0.25, 0.22, 0.95)
+        property color  batteryColor: status === "Charging" ? chargingColor
+                                      : capacity <= 10 ? lowColor
+                                      : normalColor
 
         Timer {
             interval: 2000; running: true; repeat: true; triggeredOnStart: true
@@ -94,12 +101,12 @@ Row {
 
         Text {
             text: batteryRow.capacity + "%"
-            font.family: mainFontFamily; font.pixelSize: sz
-            color: Qt.rgba(1, 1, 1, 0.8)
+            font.family: mainFontFamily; font.pixelSize: sz * scaleFactor
+            color: batteryRow.batteryColor
         }
         Text {
-            font.family: iconFontFamily; font.pixelSize: sz
-            color: Qt.rgba(1, 1, 1, 0.8)
+            font.family: iconFontFamily; font.pixelSize: sz * scaleFactor
+            color: batteryRow.batteryColor
             text: {
                 var c = batteryRow.capacity
                 if (batteryRow.status === "Charging") {

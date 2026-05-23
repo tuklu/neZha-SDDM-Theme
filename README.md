@@ -72,21 +72,20 @@ foreground=assets/foreground.png
 text_color=#b3ffffff
 ```
 
-### Resolution
+### Resolution and scaling
 
-The root size is set to the **logical** resolution (physical pixels ÷ HiDPI scale factor). Default is `1600x1000` (3200×2000 @ 2× scale). Find yours by running:
+The theme uses a `1600x1000` design canvas, but it now reads SDDM's actual `Screen.width` and `Screen.height` at runtime and scales the clock, foreground, login form, and status bar proportionally.
+
+If the theme appears too large after an SDDM, Qt, or Arch update, check what the greeter reports:
 
 ```bash
 sddm-greeter --test-mode --theme /path/to/neZha
 # look for: Adding view for "..." QRect(0,0 WxH)
 ```
 
-Then edit `Main.qml` lines 10–11:
+On HiDPI displays, SDDM may report logical pixels rather than physical pixels. The QML should adapt automatically, so you should not need to edit `Main.qml` for each monitor.
 
-```qml
-width: 1600   // px
-height: 1000  // px
-```
+If the installed greeter still looks zoomed while test mode looks correct, check for SDDM-level scaling overrides in `/etc/sddm.conf`, `/etc/sddm.conf.d/*.conf`, or `/usr/share/sddm/scripts/Xsetup`, such as `QT_SCALE_FACTOR`, `QT_SCREEN_SCALE_FACTORS`, or `QT_AUTO_SCREEN_SCALE_FACTOR`.
 
 ---
 
