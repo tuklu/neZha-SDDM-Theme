@@ -16,7 +16,7 @@ Row {
             text: (keyboard && keyboard.layouts && keyboard.layouts[keyboard.currentLayout])
                   ? keyboard.layouts[keyboard.currentLayout].shortName : "U.S"
             font.family: mainFontFamily; font.pixelSize: 14 * scaleFactor
-            color: Qt.rgba(1, 1, 1, 0.8); topPadding: -4 * scaleFactor
+            color: Qt.rgba(1, 1, 1, 0.8); topPadding: -2 * scaleFactor
         }
         Text {
             text: ""; font.family: iconFontFamily; font.pixelSize: sz * scaleFactor
