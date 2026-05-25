@@ -29,19 +29,25 @@ Item {
             }
         }
 
-        TextField {
-            id: passwordField
+        Item {
             width: 222 * scaleFactor; height: 40 * scaleFactor
-            focus: true
-            echoMode: TextInput.Password
-            cursorDelegate: Component { Item {} }
-            font.family: mainFontFamily; font.pixelSize: 11 * scaleFactor; font.bold: true
-            color: textColor
-            horizontalAlignment: TextInput.AlignHCenter
 
-            background: Rectangle {
-                color: Qt.rgba(0, 0, 0, 0.2); radius: 37 * scaleFactor
-                border.width: Math.max(1, scaleFactor); border.color: Qt.rgba(1, 1, 1, 0.1)
+            TextField {
+                id: passwordField
+                anchors.fill: parent
+                focus: true
+                echoMode: TextInput.Password
+                cursorDelegate: Component { Item {} }
+                font.family: mainFontFamily; font.pixelSize: 11 * scaleFactor; font.bold: true
+                color: textColor
+                horizontalAlignment: TextInput.AlignHCenter
+
+                background: Rectangle {
+                    color: Qt.rgba(0, 0, 0, 0.2); radius: 37 * scaleFactor
+                    border.width: Math.max(1, scaleFactor); border.color: Qt.rgba(1, 1, 1, 0.1)
+                }
+
+                Keys.onReturnPressed: sddm.login(userModel.lastUser, passwordField.text, sessionModel.lastIndex)
             }
 
             Text {
@@ -51,8 +57,6 @@ Item {
                 color: Qt.rgba(1, 1, 1, 0.5)
                 visible: !passwordField.text.length
             }
-
-            Keys.onReturnPressed: sddm.login(userModel.lastUser, passwordField.text, sessionModel.lastIndex)
         }
     }
 }
