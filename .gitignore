@@ -5,3 +5,7 @@ fonts/SF-Pro-Display-Bold.otf
 assets/background.jpg
 assets/foreground.png
 assets/middleOverlay.png
+
+# Releases zip files
+*tar.gz
+*tar.xz
